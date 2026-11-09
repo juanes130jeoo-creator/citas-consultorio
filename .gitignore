@@ -1,5 +1,7 @@
 node_modules
 src/main/frontend/generated/
+# los datos los crea la app sola la primera vez
+/datos/
 HELP.md
 target/
 .mvn/wrapper/maven-wrapper.jar
