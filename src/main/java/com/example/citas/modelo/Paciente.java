@@ -1,6 +1,7 @@
 package com.example.citas.modelo;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 public class Paciente {
 
@@ -22,6 +23,11 @@ public class Paciente {
     // asi se guarda en el archivo: documento|nombre|telefono|fecha
     public String toLinea() {
         return documento + "|" + nombre + "|" + telefono + "|" + fechaNacimiento;
+    }
+
+    // la edad se calcula con la fecha de nacimiento
+    public int getEdad() {
+        return Period.between(fechaNacimiento, LocalDate.now()).getYears();
     }
 
     public String getDocumento() {
