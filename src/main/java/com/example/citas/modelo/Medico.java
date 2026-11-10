@@ -2,6 +2,12 @@ package com.example.citas.modelo;
 
 public class Medico {
 
+    // especialidades que maneja el consultorio
+    public static final String[] ESPECIALIDADES = {
+        "Medicina general", "Pediatría", "Odontología", "Dermatología",
+        "Ginecología", "Cardiología", "Psicología"
+    };
+
     private int id;
     private String nombre;
     private String especialidad;
