@@ -43,6 +43,7 @@ public class MainLayout extends AppLayout {
         menu.addItem(new SideNavItem("Citas", CitasView.class, VaadinIcon.CALENDAR.create()));
         menu.addItem(new SideNavItem("Pacientes", PacientesView.class, VaadinIcon.USERS.create()));
         menu.addItem(new SideNavItem("Médicos", MedicosView.class, VaadinIcon.DOCTOR.create()));
+        menu.addItem(new SideNavItem("Agenda semanal", AgendaSemanalView.class, VaadinIcon.TABLE.create()));
 
         addToDrawer(menu);
         setPrimarySection(Section.DRAWER);

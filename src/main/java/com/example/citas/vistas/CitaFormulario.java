@@ -111,6 +111,13 @@ public class CitaFormulario extends Dialog {
         getFooter().add(cancelar, guardar);
     }
 
+    // lo usa la agenda semanal: al dar clic en una casilla libre ya queda puesto el medico, el dia y la hora
+    public void prellenar(int idMedico, LocalDate dia, LocalTime franja) {
+        medico.setValue(buscarMedico(idMedico));
+        fecha.setValue(dia);
+        hora.setValue(franja);
+    }
+
     private void filtrarMedicos() {
         String esp = especialidad.getValue();
         Medico seleccionado = medico.getValue();
