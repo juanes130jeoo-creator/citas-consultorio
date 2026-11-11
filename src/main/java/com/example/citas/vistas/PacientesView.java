@@ -9,6 +9,7 @@ import java.util.Locale;
 import com.example.citas.datos.ArchivoDatos;
 import com.example.citas.modelo.Cita;
 import com.example.citas.modelo.Paciente;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -82,6 +83,10 @@ public class PacientesView extends VerticalLayout {
 
         // botones de editar y eliminar en cada fila
         grid.addComponentColumn(p -> {
+            // abre la vista del historial con el documento en la url
+            Button historial = new Button(VaadinIcon.CLIPBOARD_TEXT.create());
+            historial.addClickListener(e -> UI.getCurrent().navigate(HistorialPacienteView.class, p.getDocumento()));
+
             Button editar = new Button(VaadinIcon.EDIT.create());
             editar.addClickListener(e -> abrirFormulario(p));
 
@@ -89,7 +94,7 @@ public class PacientesView extends VerticalLayout {
             eliminar.addThemeVariants(ButtonVariant.LUMO_ERROR);
             eliminar.addClickListener(e -> confirmarEliminar(p));
 
-            return new HorizontalLayout(editar, eliminar);
+            return new HorizontalLayout(historial, editar, eliminar);
         }).setHeader("Acciones").setAutoWidth(true);
 
         grid.setSizeFull();

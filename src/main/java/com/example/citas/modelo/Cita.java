@@ -40,6 +40,16 @@ public class Cita {
         return CANCELADA.equals(estado);
     }
 
+    // en pantalla una cita programada que ya paso se muestra como Atendida
+    public String getEstadoParaMostrar() {
+        if (estaCancelada()) {
+            return CANCELADA;
+        }
+        boolean yaPaso = fecha.isBefore(LocalDate.now())
+                || (fecha.equals(LocalDate.now()) && hora.isBefore(LocalTime.now()));
+        return yaPaso ? "Atendida" : PROGRAMADA;
+    }
+
     public int getId() {
         return id;
     }

@@ -1,7 +1,6 @@
 package com.example.citas.vistas;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -102,13 +101,13 @@ public class CitasView extends VerticalLayout {
         grid.addColumn(c -> nombreMedico(c)).setHeader("Médico").setAutoWidth(true);
         grid.addColumn(c -> especialidad(c)).setHeader("Especialidad").setAutoWidth(true);
         grid.addColumn(Cita::getMotivo).setHeader("Motivo").setAutoWidth(true);
-        grid.addColumn(c -> estadoParaMostrar(c)).setHeader("Estado").setAutoWidth(true);
+        grid.addColumn(Cita::getEstadoParaMostrar).setHeader("Estado").setAutoWidth(true);
 
         if (conAcciones) {
             grid.addComponentColumn(c -> {
                 HorizontalLayout botones = new HorizontalLayout();
                 // solo se puede cambiar una cita que sigue programada
-                if (estadoParaMostrar(c).equals(Cita.PROGRAMADA)) {
+                if (c.getEstadoParaMostrar().equals(Cita.PROGRAMADA)) {
                     Button reprogramar = new Button("Reprogramar", VaadinIcon.CALENDAR_CLOCK.create());
                     reprogramar.addThemeVariants(ButtonVariant.LUMO_SMALL);
                     reprogramar.addClickListener(e -> new CitaFormulario(c, this::actualizar).open());
@@ -203,16 +202,6 @@ public class CitasView extends VerticalLayout {
             Mensajes.exito("Cita cancelada");
         });
         confirmar.open();
-    }
-
-    // en pantalla una cita programada que ya paso se muestra como Atendida
-    private String estadoParaMostrar(Cita c) {
-        if (c.estaCancelada()) {
-            return Cita.CANCELADA;
-        }
-        boolean yaPaso = c.getFecha().isBefore(LocalDate.now())
-                || (c.getFecha().equals(LocalDate.now()) && c.getHora().isBefore(LocalTime.now()));
-        return yaPaso ? "Atendida" : Cita.PROGRAMADA;
     }
 
     private String nombrePaciente(Cita c) {
